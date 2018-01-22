@@ -5,6 +5,9 @@ import {MaterialModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
 import {ReactiveFormsModule } from '@angular/forms';
+import {baseURL} from './shared/baseurl';
+import {Http, Response, HttpModule} from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 
 
 import 'hammerjs';
@@ -14,6 +17,7 @@ import 'hammerjs';
 import {DishService} from './services/dish.service';
 import {PromotionService} from './services/promotion.service';
 import {LeaderService} from './services/leader.service';
+import {ProcessHttpmsgService} from './services/process-httpmsg.service';
 
 import {AppRoutingModule} from './app-routing/app-routing.module';
 
@@ -46,11 +50,16 @@ import { LoginComponent } from './login/login.component';
     FlexLayoutModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    HttpModule
   ],
   providers: [DishService,
     PromotionService,
-    LeaderService
+    LeaderService,
+    // {provide:'BaseURL',useClass: baseURL, useValue:baseURL, deps:[MenuComponent,HomeComponent,AboutComponent,ContactComponent, DishdetailComponent]},
+    {provide:'BaseURL',useValue:baseURL},
+    ProcessHttpmsgService
   ],
   entryComponents:[
     LoginComponent
